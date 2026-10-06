@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía Interactiva: Comunicación Visual</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Cinzel:wght@700&family=Inter:wght@300;400;600;800&family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f5ff',
+                            100: '#e0ebff',
+                            500: '#4f46e5',
+                            600: '#4338ca',
+                            700: '#3730a3',
+                            900: '#1e1b4b',
+                        },
+                        accent: {
+                            pink: '#ec4899',
+                            amber: '#f59e0b',
+                            cyan: '#06b6d4',
+                            emerald: '#10b981'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['Space Grotesk', 'monospace'],
+                        cursive: ['Caveat', 'cursive'],
+                        cinzel: ['Cinzel', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos personalizados y barra de desplazamiento */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+        
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #a855f7, #6366f1, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-amber {
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Clases para fuentes de demostración */
+        .demo-serif { font-family: 'Playfair Display', serif; }
+        .demo-sans { font-family: 'Inter', sans-serif; }
+        .demo-geo { font-family: 'Space Grotesk', sans-serif; }
+        .demo-script { font-family: 'Caveat', cursive; }
+
+        /* Simulación de efecto ríos visuales */
+        .river-simulation {
+            word-spacing: 12px;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white min-h-screen">
+
+    <!-- Barra de Navegación Superior -->
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-indigo-500/20">
+                    <i class="fa-solid font-bold fa-palette"></i>
+                </div>
+                <div>
+                    <span class="font-extrabold text-lg text-white tracking-tight">Comunicación Visual 
+                    
+
+                    <span class="hidden sm:inline-block text-xs bg-indigo-500/20 text-indigo-300 font-semibold px-2 py-0.5 rounded-full ml-2">PrepaTec</span>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex space-x-1 text-xs font-semibold">
+                <a href="#repaso-color" class="px-3 py-2 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white transition">1. Color</a>
+                <a href="#tipografia" class="px-3 py-2 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white transition">2. Tipografía (7.1)</a>
+                <a href="#jerarquia" class="px-3 py-2 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white transition">3. Jerarquía (7.2)</a>
+                <a href="#composicion" class="px-3 py-2 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white transition">4. Composición (7.3)</a>
+                <a href="#laboratorio" class="px-3 py-2 rounded-lg hover:bg-slate-800 text-indigo-300 hover:text-white transition">5. Laboratorio</a>
+                <a href="#desafio-final" class="px-3 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition shadow-md shadow-indigo-600/30">Desafío Final</a>
+            </nav>
+
+            <div class="md:hidden">
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2 text-slate-400 hover:text-white focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Menú Desplegable Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 py-3 space-y-2">
+            <a href="#repaso-color" onclick="toggleMobileMenu()" class="block py-2 text-sm text-slate-300 hover:text-white">1. Color</a>
+            <a href="#tipografia" onclick="toggleMobileMenu()" class="block py-2 text-sm text-slate-300 hover:text-white">2. Tipografía (7.1)</a>
+            <a href="#jerarquia" onclick="toggleMobileMenu()" class="block py-2 text-sm text-slate-300 hover:text-white">3. Jerarquía (7.2)</a>
+            <a href="#composicion" onclick="toggleMobileMenu()" class="block py-2 text-sm text-slate-300 hover:text-white">4. Composición (7.3)</a>
+            <a href="#laboratorio" onclick="toggleMobileMenu()" class="block py-2 text-sm text-indigo-300">5. Laboratorio</a>
+            <a href="#desafio-final" onclick="toggleMobileMenu()" class="block py-2 text-sm text-indigo-400 font-bold">Desafío Final</a>
+        </div>
+    </header>
+
+    <!-- Encabezado Principal (Hero Banner) -->
+    <section class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-tr from-indigo-600/20 via-purple-600/20 to-pink-600/10 blur-3xl rounded-full pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center space-x-2 bg-indigo-950/80 border border-indigo-500/30 px-4 py-1.5 rounded-full text-indigo-300 text-xs font-semibold mb-6">
+                <i class="fa-solid fa-sparkles text-amber-400"></i>
+                <span>Creatividad y Diseño Digital &bull; Solicitado por Erin Sandoval</span>
+            </div>
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight mb-6">
+                El Arte de la <span class="text-gradient">Comunicación Visual</span>
+            </h1>
+            <p class="max-w-3xl mx-auto text-base sm:text-xl text-slate-300 leading-relaxed font-normal mb-8">
+                Aprende a transformar palabras e imágenes en <strong>piezas visuales y editoriales de alto impacto</strong>. Domina la teoría del color, las reglas tipográficas, la jerarquía visual y la composición para cautivar a tu audiencia.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a href="#repaso-color" class="px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+                    <span>Iniciar Recorrido</span>
+                    <i class="fa-solid fa-arrow-down"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 0: TEORÍA Y PSICOLOGÍA DEL COLOR -->
+    <section id="repaso-color" class="py-16 bg-slate-900/60 border-y border-slate-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center space-x-3 mb-2">
+                <span class="px-3 py-1 bg-pink-500/10 border border-pink-500/30 text-pink-400 rounded-full text-xs font-bold uppercase tracking-wider">Punto de Partida</span>
+                <span class="text-slate-400 text-xs font-medium">Recordatorio Clave</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
+                0. Teoría y Psicología del Color: <span class="text-pink-400">El Lenguaje Emocional</span>
+            </h2>
+            <p class="text-slate-300 max-w-3xl text-sm sm:text-base mb-8">
+                Antes de organizar la tipografía y las imágenes, recuerda que el <strong>color comunica emociones de forma instantánea</strong>, mucho antes de leer una sola palabra. Haz clic en las diferentes paletas para explorar su impacto psicológico:
+            </p>
+
+            <!-- Selector Interactivo de Color -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+                <!-- Selector de Tarjetas de Color -->
+                <div class="lg:col-span-1 space-y-3" id="color-btn-container">
+                    <button onclick="selectColorMood('rojo')" id="btn-rojo" class="w-full text-left p-4 rounded-xl glass-panel hover:border-red-500/50 transition flex items-center justify-between group border-red-500">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-7 h-7 rounded-full bg-red-500 shadow-md shadow-red-500/50"></span>
+                            <div>
+                                <h3 class="font-bold text-white text-sm">Rojo: Energía y Pasión</h3>
+                                <p class="text-xs text-slate-400">Enfoque inmediato, peligro, urgencia</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-red-400 transition"></i>
+                    </button>
+
+                    <button onclick="selectColorMood('azul')" id="btn-azul" class="w-full text-left p-4 rounded-xl glass-panel hover:border-blue-500/50 transition flex items-center justify-between group">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-7 h-7 rounded-full bg-blue-500 shadow-md shadow-blue-500/50"></span>
+                            <div>
+                                <h3 class="font-bold text-white text-sm">Azul: Confianza y Calma</h3>
+                                <p class="text-xs text-slate-400">Corporativo, tecnología, serenidad</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-blue-400 transition"></i>
+                    </button>
+
+                    <button onclick="selectColorMood('amarillo')" id="btn-amarillo" class="w-full text-left p-4 rounded-xl glass-panel hover:border-amber-400/50 transition flex items-center justify-between group">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-7 h-7 rounded-full bg-amber-400 shadow-md shadow-amber-400/50"></span>
+                            <div>
+                                <h3 class="font-bold text-white text-sm">Amarillo: Optimismo e Innovación</h3>
+                                <p class="text-xs text-slate-400">Luz, juventud, advertencia sutil</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 transition"></i>
+                    </button>
+
+                    <button onclick="selectColorMood('verde')" id="btn-verde" class="w-full text-left p-4 rounded-xl glass-panel hover:border-emerald-500/50 transition flex items-center justify-between group">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-7 h-7 rounded-full bg-emerald-500 shadow-md shadow-emerald-500/50"></span>
+                            <div>
+                                <h3 class="font-bold text-white text-sm">Verde: Naturaleza y Crecimiento</h3>
+                                <p class="text-xs text-slate-400">Salud, sustentabilidad, frescura</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-emerald-400 transition"></i>
+                    </button>
+
+                    <button onclick="selectColorMood('morado')" id="btn-morado" class="w-full text-left p-4 rounded-xl glass-panel hover:border-purple-500/50 transition flex items-center justify-between group">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-7 h-7 rounded-full bg-purple-500 shadow-md shadow-purple-500/50"></span>
+                            <div>
+                                <h3 class="font-bold text-white text-sm">Morado: Misterio y Creatividad</h3>
+                                <p class="text-xs text-slate-400">Lujo, imaginación, fantasía</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-purple-400 transition"></i>
+                    </button>
+                </div>
+
+                <!-- Muestra de Vista Previa -->
+                <div class="lg:col-span-2 glass-panel rounded-2xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden border border-slate-700" id="color-preview-box">
+                    <div id="color-preview-content" class="relative z-10 transition-all duration-300">
+                        <!-- Contenido dinámico mediante JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 1: 7.1 FUNDAMENTOS DE TIPOGRAFÍA -->
+    <section id="tipografia" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center space-x-3 mb-2">
+                <span class="px-3 py-1 bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 rounded-full text-xs font-bold uppercase tracking-wider">Sección 7.1</span>
+                <span class="text-slate-400 text-xs font-medium">Fundamentos de Texto</span>
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-6">
+                Fundamentos de <span class="text-gradient">Tipografía</span>
+            </h2>
+
+            <!-- Cuadro introductorio -->
+            <div class="glass-panel p-6 sm:p-8 rounded-2xl mb-12 border-l-4 border-indigo-500">
+                <h3 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-font text-indigo-400"></i> Introducción: Las letras están en todas partes
+                </h3>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-4">
+                    El diseño tipográfico está profundamente integrado en nuestra vida diaria: desde las etiquetas de un paquete de snacks hasta los letreros de tráfico en la autopista. Estamos constantemente rodeados de tipos de letra que otorgan perspectiva y contexto sobre marcas, espacios e ideas.
+                </p>
+                <p class="text-indigo-200 text-sm font-semibold bg-indigo-950/60 p-3 rounded-lg border border-indigo-500/20">
+                    <i class="fa-solid fa-quote-left mr-2 text-indigo-400"></i>
+                    El diseño tipográfico es el arte de crear mensajes fáciles de leer con composiciones estéticamente agradables. <strong>No requiere crear nuevas fuentes desde cero</strong>, sino dominar cómo combinar profesionalmente las existentes.
+                </p>
+            </div>
+
+            <!-- Cuadrícula de Estilos -->
+            <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-layer-group text-pink-400"></i> Estilos Tipográficos
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <!-- Tarjeta Serif -->
+                <div class="glass-panel p-6 rounded-2xl hover:border-indigo-500/50 transition group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-serif text-2xl font-bold mb-4 border border-amber-500/20">
+                            Ag
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Serif (Con Remates / Serifa)</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                            Arraigada en la caligrafía tradicional. Incluye trazos decorativos o "pies" en los extremos de los caracteres.
+                        </p>
+                        <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center mb-3">
+                            <span class="demo-serif text-2xl font-bold text-amber-200">Clásico y Formal</span>
+                        </div>
+                    </div>
+                    <span class="text-[11px] text-amber-400/90 font-medium bg-amber-500/10 px-2.5 py-1 rounded-full text-center">
+                        Ideal para: Libros impresos y textos largos
+                    </span>
+                </div>
+
+                <!-- Tarjeta Sans Serif -->
+                <div class="glass-panel p-6 rounded-2xl hover:border-indigo-500/50 transition group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-sans text-2xl font-bold mb-4 border border-indigo-500/20">
+                            Ag
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Sans Serif (Palo Seco)</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                            Carece de remates decorativos. Líneas limpias y modernas con gran versatilidad en pantallas.
+                        </p>
+                        <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center mb-3">
+                            <span class="demo-sans text-xl font-bold text-indigo-300">Moderno y Limpio</span>
+                        </div>
+                    </div>
+                    <span class="text-[11px] text-indigo-400/90 font-medium bg-indigo-500/10 px-2.5 py-1 rounded-full text-center">
+                        Ideal para: Pantallas digitales y titulares
+                    </span>
+                </div>
+
+                <!-- Tarjeta Geométrica -->
+                <div class="glass-panel p-6 rounded-2xl hover:border-indigo-500/50 transition group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-mono text-2xl font-bold mb-4 border border-cyan-500/20">
+                            OAN
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Geométrica</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                            Construida a partir de formas geométricas puras. La "O" es un círculo perfecto con ángulos afilados.
+                        </p>
+                        <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center mb-3">
+                            <span class="demo-geo text-xl font-bold text-cyan-300">Estructura Pura</span>
+                        </div>
+                    </div>
+                    <span class="text-[11px] text-cyan-400/90 font-medium bg-cyan-500/10 px-2.5 py-1 rounded-full text-center">
+                        Ideal para: Logotipos y diseño futurista
+                    </span>
+                </div>
+
+                <!-- Tarjeta Cursiva/Script -->
+                <div class="glass-panel p-6 rounded-2xl hover:border-indigo-500/50 transition group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center font-cursive text-3xl mb-4 border border-pink-500/20">
+                            Script
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Script (Cursiva / Manuscrita)</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                            Imita la caligrafía manual y la caligrafía artística. Puede ir desde caligrafía elegante hasta trazos casuales.
+                        </p>
+                        <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center mb-3">
+                            <span class="demo-script text-2xl text-pink-300">Manuscrito</span>
+                        </div>
+                    </div>
+                    <span class="text-[11px] text-pink-400/90 font-medium bg-pink-500/10 px-2.5 py-1 rounded-full text-center">
+                        Uso moderado: Títulos o acentos
+                    </span>
+                </div>
+            </div>
+
+            <!-- Errores de Maquetación -->
+            <div class="glass-panel p-8 rounded-3xl mb-16 border border-slate-700">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                    <div>
+                        <span class="text-xs font-bold text-amber-400 tracking-wider uppercase">¡Advertencia de Maquetación!</span>
+                        <h3 class="text-2xl font-extrabold text-white">Líneas Viudas, Huérfanas, Runt y Ríos Visuales</h3>
+                        <p class="text-slate-400 text-sm">Errores comunes de formato que interrumpen la lectura y desordenan el diseño de página.</p>
+                    </div>
+                    <div class="inline-flex p-1 bg-slate-900 rounded-xl border border-slate-800 self-start">
+                        <button onclick="toggleTypographyErrorView('error')" id="btn-view-error" class="px-4 py-2 text-xs font-bold rounded-lg bg-red-500/20 text-red-300 border border-red-500/40">
+                            <i class="fa-solid fa-bug mr-1"></i> Ver Errores
+                        </button>
+                        <button onclick="toggleTypographyErrorView('correct')" id="btn-view-correct" class="px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-white">
+                            <i class="fa-solid fa-circle-check mr-1"></i> Ver Solución
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="errors-container">
+                    <!-- Viuda -->
+                    <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-white text-base">Línea Viuda</h4>
+                                <span id="tag-viuda" class="badge-status text-[10px] px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30">Error</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-4">
+                                La <strong>última línea</strong> de un párrafo queda aislada en la parte superior de una nueva columna o página.
+                            </p>
+                            <div class="p-3 bg-white text-slate-900 rounded-xl text-xs font-sans shadow-inner min-h-[130px] flex flex-col justify-between" id="box-viuda">
+                                <!-- Poblado por JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Huérfana -->
+                    <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-white text-base">Línea Huérfana</h4>
+                                <span id="tag-huerfana" class="badge-status text-[10px] px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30">Error</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-4">
+                                La <strong>primera línea</strong> de un párrafo queda aislada al final de una columna o página.
+                            </p>
+                            <div class="p-3 bg-white text-slate-900 rounded-xl text-xs font-sans shadow-inner min-h-[130px] flex flex-col justify-between" id="box-huerfana">
+                                <!-- Poblado por JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Runt -->
+                    <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-white text-base">Palabra Suelta (Runt)</h4>
+                                <span id="tag-runt" class="badge-status text-[10px] px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30">Error</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-4">
+                                Una sola palabra corta descolgada en la última línea de un párrafo, rompiendo la armonía visual.
+                            </p>
+                            <div class="p-3 bg-white text-slate-900 rounded-xl text-xs font-sans shadow-inner min-h-[130px]" id="box-runt">
+                                <!-- Poblado por JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ríos Visuales -->
+                    <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-white text-base">Ríos Visuales</h4>
+                                <span id="tag-rios" class="badge-status text-[10px] px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30">Error</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-4">
+                                Espacios blancos verticales no deseados que atraviesan un bloque de texto justificado debido a un mal espaciado.
+                            </p>
+                            <div class="p-3 bg-white text-slate-900 rounded-xl text-xs font-sans shadow-inner min-h-[130px]" id="box-rios">
+                                <!-- Poblado por JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buenas Prácticas de Combinación Tipográfica -->
+            <div class="glass-panel p-8 rounded-3xl border border-indigo-500/30">
+                <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles text-indigo-400"></i> Buenas Prácticas para Combinar Tipografías
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold mb-3">1</div>
+                        <h4 class="font-bold text-white text-sm mb-1">Combina Sans + Serif</h4>
+                        <p class="text-xs text-slate-400">Crea un contraste natural y armonioso entre estilos modernos y clásicos.</p>
+                    </div>
+
+                    <div class="bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
+                        <div class="w-8 h-8 rounded-lg bg-red-500/20 text-red-300 flex items-center justify-center font-bold mb-3">2</div>
+                        <h4 class="font-bold text-white text-sm mb-1">Evita Fuentes Similares</h4>
+                        <p class="text-xs text-slate-400">Usar dos tipografías muy parecidas genera conflicto visual en lugar de contraste claro.</p>
+                    </div>
+
+                    <div class="bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
+                        <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold mb-3">3</div>
+                        <h4 class="font-bold text-white text-sm mb-1">Respeta las Eras Históricas</h4>
+                        <p class="text-xs text-slate-400">Elige fuentes que compartan contexto histórico pero cumplan distintos niveles de jerarquía.</p>
+                    </div>
+
+                    <div class="bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold mb-3">4</div>
+                        <h4 class="font-bold text-white text-sm mb-1">Simplicidad Primero</h4>
+                        <p class="text-xs text-slate-400">Limita tus diseños a un <strong>máximo de 2 tipografías</strong> y aprovecha los pesos (negrita, regular, cursiva).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: 7.2 JERARQUÍA VISUAL -->
+    <section id="jerarquia" class="py-20 bg-slate-900/70 border-y border-slate-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center space-x-3 mb-2">
+                <span class="px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 rounded-full text-xs font-bold uppercase tracking-wider">Sección 7.2</span>
+                <span class="text-slate-400 text-xs font-medium">Orden y Estructura</span>
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-6">
+                Jerarquía <span class="text-gradient-amber">Visual</span>
+            </h2>
+
+            <!-- Banner Estadístico de Hilbert -->
+            <div class="glass-panel p-8 rounded-3xl mb-12 border-l-4 border-amber-400 flex flex-col md:flex-row items-center gap-6">
+                <div class="w-20 h-20 rounded-2xl bg-amber-400/10 text-amber-400 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-newspaper text-4xl"></i>
+                </div>
+                <div>
+                    <div class="flex flex-wrap items-center gap-3 mb-1">
+                        <span class="text-3xl sm:text-4xl font-black text-amber-400">174 Periódicos al Día</span>
+                        <span class="text-xs uppercase font-bold text-amber-300/80 tracking-widest bg-amber-500/10 px-2.5 py-0.5 rounded-full">Dato Revelador &bull; Dr. Martin Hilbert</span>
+                    </div>
+                    <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+                        Según estudios del Dr. Martin Hilbert (Universidad de California), recibimos una cantidad abrumadora de información equivalente a <strong>174 periódicos completos cada día</strong> (más de 5 veces la cantidad de 1986). Además, el <strong>80% de esa información es puramente visual</strong>. Establecer una jerarquía visual clara es esencial para guiar al espectador sin fatiga cognitiva.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Desglose de Niveles de Jerarquía -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+                <!-- Nivel 1 -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-700 relative overflow-hidden">
+                    <div class="text-xs font-black text-indigo-400 uppercase tracking-widest mb-2">Nivel 1</div>
+                    <h3 class="text-xl font-extrabold text-white mb-3">Elemento Principal (Titular)</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                        Punto de entrada focal inmediato. Captura la atención usando gran escala, contraste fuerte o peso pronunciado.
+                    </p>
+                    <div class="bg-slate-900 p-4 rounded-xl text-center border border-indigo-500/30">
+                        <span class="text-2xl font-black text-white block">TITULAR PRINCIPAL</span>
+                        <span class="text-[10px] text-slate-400">Impacto Inmediato</span>
+                    </div>
+                </div>
+
+                <!-- Nivel 2 -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-700 relative overflow-hidden">
+                    <div class="text-xs font-black text-pink-400 uppercase tracking-widest mb-2">Nivel 2</div>
+                    <h3 class="text-xl font-extrabold text-white mb-3">Subtítulos y Secciones</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                        Organiza el contenido en bloques digeribles. Guía a la audiencia secuencialmente a través de la historia.
+                    </p>
+                    <div class="bg-slate-900 p-4 rounded-xl text-center border border-pink-500/30">
+                        <span class="text-base font-bold text-pink-300 block">Subtítulo de Sección</span>
+                        <span class="text-[10px] text-slate-400">Estructura Intermedia</span>
+                    </div>
+                </div>
+
+                <!-- Nivel 3 -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-700 relative overflow-hidden">
+                    <div class="text-xs font-black text-cyan-400 uppercase tracking-widest mb-2">Nivel 3</div>
+                    <h3 class="text-xl font-extrabold text-white mb-3">Texto de Cuerpo y Detalles</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                        Contiene explicaciones detalladas. Prioriza la lectura cómoda con un interlineado adecuado y tamaños legibles (14px - 18px).
+                    </p>
+                    <div class="bg-slate-900 p-4 rounded-xl text-center border border-cyan-500/30">
+                        <span class="text-xs font-normal text-slate-300 block">Texto de cuerpo continuo...</span>
+                        <span class="text-[10px] text-slate-400">Información Completa</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: 7.3 COMPOSICIÓN VISUAL -->
+    <section id="composicion" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center space-x-3 mb-2">
+                <span class="px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 rounded-full text-xs font-bold uppercase tracking-wider">Sección 7.3</span>
+                <span class="text-slate-400 text-xs font-medium">Distribución y Maquetación</span>
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-6">
+                Composición <span class="text-gradient">Visual</span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <!-- Regla de Tercios -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-bold mb-4">
+                        <i class="fa-solid fa-border-all text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Regla de los Tercios</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Divide tu lienzo en una cuadrícula de 3x3. Ubica los puntos de interés en las intersecciones para mayor dinamismo.
+                    </p>
+                </div>
+
+                <!-- Espacio Negativo -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition">
+                    <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold mb-4">
+                        <i class="fa-solid fa-expand text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Espacio Negativo (Aire)</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        El espacio vacío no es espacio desperdiciado; permite respirar al diseño, destaca lo importante y aporta elegancia.
+                    </p>
+                </div>
+
+                <!-- Alineación y Retícula -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition">
+                    <div class="w-10 h-10 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center font-bold mb-4">
+                        <i class="fa-solid fa-align-left text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Alineación y Retícula</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Conecta visualmente los elementos. Alinear bordes crea estructura clara, unidad y cohesión.
+                    </p>
+                </div>
+
+                <!-- Equilibrio y Pesos -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold mb-4">
+                        <i class="fa-solid fa-scale-balanced text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Equilibrio y Pesos</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Distribuye los pesos visuales de forma simétrica o asimétrica para que ninguna zona se sienta recargada.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: LABORATORIO DE COMUNICACIÓN VISUAL -->
+    <section id="laboratorio" class="py-20 bg-slate-900/90 border-t border-slate-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center space-x-3 mb-2">
+                <span class="px-3 py-1 bg-purple-500/10 border border-purple-500/30 text-purple-400 rounded-full text-xs font-bold uppercase tracking-wider">Estudio Interactivo</span>
+                <span class="text-slate-400 text-xs font-medium">Laboratorio en Vivo</span>
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+                Laboratorio de <span class="text-gradient">Comunicación Visual</span>
+            </h2>
+            <p class="text-slate-300 max-w-3xl text-sm sm:text-base mb-10">
+                Aplica la teoría en tiempo real. Ajusta la <strong>familia tipográfica</strong>, la <strong>escala de jerarquía</strong>, la <strong>paleta cromática</strong> y la <strong>alineación</strong> para observar el impacto inmediato en la legibilidad.
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Panel de Control -->
+                <div class="lg:col-span-5 glass-panel p-6 rounded-3xl border border-slate-700 space-y-6">
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-3">
+                        <i class="fa-solid fa-sliders text-purple-400"></i> Controles del Lienzo
+                    </h3>
+
+                    <!-- Selector de Tipografía -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Estilo Tipográfico (7.1)</label>
+                        <div class="grid grid-cols-2 gap-2" id="lab-font-options">
+                            <button onclick="setLabFont('sans')" id="lab-font-sans" class="px-3 py-2 text-xs font-semibold rounded-xl bg-indigo-600 text-white border border-indigo-400 text-left transition">
+                                <span class="demo-sans font-bold block">Sans Serif</span>
+                                <span class="text-[10px] text-indigo-200">Limpio / Digital</span>
+                            </button>
+                            <button onclick="setLabFont('serif')" id="lab-font-serif" class="px-3 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-left transition">
+                                <span class="demo-serif font-bold block">Serif (Clásica)</span>
+                                <span class="text-[10px] text-slate-400">Elegante / Editorial</span>
+                            </button>
+                            <button onclick="setLabFont('geo')" id="lab-font-geo" class="px-3 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-left transition">
+                                <span class="demo-geo font-bold block">Geométrica</span>
+                                <span class="text-[10px] text-slate-400">Estructura / Futuro</span>
+                            </button>
+                            <button onclick="setLabFont('script')" id="lab-font-script" class="px-3 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-left transition">
+                                <span class="demo-script font-bold text-sm block">Script (Cursiva)</span>
+                                <span class="text-[10px] text-slate-400">Manuscrita / Creativa</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Escala de Jerarquía -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Jerarquía del Titular (7.2)</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button onclick="setLabScale('sm')" id="lab-scale-sm" class="px-3 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+                                Sutil (Pequeño)
+                            </button>
+                            <button onclick="setLabScale('md')" id="lab-scale-md" class="px-3 py-2 text-xs font-semibold rounded-xl bg-indigo-600 text-white border border-indigo-400 transition">
+                                Estándar (Mediano)
+                            </button>
+                            <button onclick="setLabScale('lg')" id="lab-scale-lg" class="px-3 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+                                Dominante (Grande)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Paleta Cromática -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Paleta Psicológica</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="setLabTheme('dark')" id="lab-theme-dark" class="px-3 py-2 text-xs font-semibold rounded-xl bg-indigo-600 text-white border border-indigo-400 flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-indigo-400"></span>
+                                <span>Oscuro Neón</span>
+                            </button>
+                            <button onclick="setLabTheme('editorial')" id="lab-theme-editorial" class="px-3 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                                <span>Editorial Cálido</span>
+                            </button>
+                            <button onclick="setLabTheme('emerald')" id="lab-theme-emerald" class="px-3 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                                <span>Frescura Bio</span>
+                            </button>
+                            <button onclick="setLabTheme('rose')" id="lab-theme-rose" class="px-3 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-pink-400"></span>
+                                <span>Pasión Creativa</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Alineación y Guías -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Composición y Guías (7.3)</label>
+                        <div class="flex items-center gap-2">
+                            <button onclick="setLabAlign('left')" id="lab-align-left" class="flex-1 py-2 text-xs font-semibold rounded-xl bg-indigo-600 text-white border border-indigo-400">
+                                <i class="fa-solid fa-align-left mr-1"></i> Izquierda
+                            </button>
+                            <button onclick="setLabAlign('center')" id="lab-align-center" class="flex-1 py-2 text-xs font-semibold rounded-xl bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700">
+                                <i class="fa-solid fa-align-center mr-1"></i> Centro
+                            </button>
+                            <button onclick="toggleLabGrid()" id="lab-btn-grid" class="px-3 py-2 text-xs font-bold rounded-xl bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-border-all"></i> Retícula 3x3
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estudio de Vista Previa -->
+                <div class="lg:col-span-7 glass-panel p-6 sm:p-8 rounded-3xl border border-slate-700 relative overflow-hidden min-h-[460px] flex flex-col justify-between" id="lab-preview-card">
+                    <!-- Retícula Superpuesta -->
+                    <div id="lab-grid-overlay" class="absolute inset-0 grid grid-cols-3 grid-rows-3 pointer-events-none hidden border border-cyan-500/20 z-20">
+                        <div class="border-r border-b border-cyan-500/20"></div>
+                        <div class="border-r border-b border-cyan-500/20"></div>
+                        <div class="border-b border-cyan-500/20"></div>
+                        <div class="border-r border-b border-cyan-500/20"></div>
+                        <div class="border-r border-b border-cyan-500/20"></div>
+                        <div class="border-b border-cyan-500/20"></div>
+                        <div class="border-r border-cyan-500/20"></div>
+                        <div class="border-r border-cyan-500/20"></div>
+                        <div></div>
+                    </div>
+
+                    <!-- Encabezado / Etiqueta -->
+                    <div class="relative z-10 mb-6">
+                        <span id="lab-card-badge" class="px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase inline-block bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                            Portada Demo
+                        </span>
+                    </div>
+
+                    <!-- Contenido de la Tarjeta -->
+                    <div class="relative z-10 my-auto text-left transition-all duration-300" id="lab-card-content">
+                        <h3 id="lab-card-title" class="demo-sans font-black text-3xl sm:text-4xl text-white tracking-tight mb-3 leading-tight">
+                            La Comunicación Visual Transforma Mensajes
+                        </h3>
+                        <p id="lab-card-subtitle" class="text-sm sm:text-base font-semibold text-indigo-300 mb-4">
+                            Sistemas tipográficos, psicología del color y composiciones equilibradas.
+                        </p>
+                        <p id="lab-card-body" class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl">
+                            La combinación de tipografía legible con una jerarquía estructurada y un generoso espacio negativo permite a tu lector absorber la narrativa de manera fluida y sin fatiga cognitiva.
+                        </p>
+                    </div>
+
+                    <!-- Pie de Tarjeta / Evaluación -->
+                    <div class="relative z-10 border-t border-slate-700/60 pt-4 mt-6 flex items-center justify-between">
+                        <div class="flex items-center space-x-2 text-xs text-slate-400">
+                            <i class="fa-solid fa-circle-info text-indigo-400"></i>
+                            <span id="lab-feedback-text">Configuración equilibrada con alta legibilidad digital.</span>
+                        </div>
+                        <span class="text-[10px] font-mono text-slate-500 uppercase">Vista Previa Interactiva</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4: DESAFÍO FINAL - JUEGO UNIFICADO DE PAREJAS -->
+    <section id="desafio-final" class="py-20 bg-slate-900 border-t border-slate-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <div class="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/30 px-4 py-1.5 rounded-full text-emerald-400 text-xs font-bold uppercase tracking-wider mb-4">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <span>Evaluación Práctica</span>
+                </div>
+                <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">
+                    El Desafío Visual <span class="text-gradient">Definitivo</span>
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base">
+                    Relaciona cada <strong>Concepto Clave</strong> con su <strong>Definición Correcta</strong>. Todos los temas están integrados en un solo tablero. Tienes un total de <strong>3 intentos</strong> para lograr un puntaje perfecto.
+                </p>
+            </div>
+
+            <!-- Barra de Estado e Intentos del Juego -->
+            <div class="glass-panel p-6 rounded-2xl mb-8 border border-slate-700 flex flex-wrap items-center justify-between gap-4 shadow-2xl">
+                <!-- Contador de Intentos -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl font-bold border border-amber-500/30" id="game-attempts-icon">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-400 font-semibold block uppercase tracking-wider">Intentos Restantes</span>
+                        <div class="flex items-center space-x-1" id="attempts-display">
+                            <!-- Iconos de vidas por JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progreso de Parejas -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl font-bold border border-indigo-500/30">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-400 font-semibold block uppercase tracking-wider">Progreso de Parejas</span>
+                        <span class="text-lg font-extrabold text-white" id="matches-score">0 / 8 Emparejados</span>
+                    </div>
+                </div>
+
+                <!-- Botón de Verificación -->
+                <div class="flex items-center gap-3">
+                    <button onclick="verifyUnifiedGame()" id="btn-submit-game" class="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition shadow-lg shadow-emerald-600/30 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double"></i>
+                        <span>Verificar Respuestas</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tablero de Juego -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="game-board">
+                <!-- Columna 1: Conceptos -->
+                <div class="space-y-3">
+                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-tag text-indigo-400"></i> 1. Selecciona un Concepto
+                    </h3>
+                    <div id="concepts-list" class="space-y-2.5">
+                        <!-- Poblado por JS -->
+                    </div>
+                </div>
+
+                <!-- Columna 2: Definiciones -->
+                <div class="space-y-3">
+                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-comment-dots text-pink-400"></i> 2. Empareja con su Definición
+                    </h3>
+                    <div id="definitions-list" class="space-y-2.5">
+                        <!-- Poblado por JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ventana Modal de Retroalimentación -->
+            <div id="game-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+                <div class="glass-panel p-8 rounded-3xl max-w-lg w-full border border-slate-700 text-center relative animate-fade-in shadow-2xl">
+                    <div id="modal-icon" class="w-20 h-20 rounded-full mx-auto flex items-center justify-center text-4xl mb-4">
+                        <!-- Icono dinámico JS -->
+                    </div>
+                    <h3 id="modal-title" class="text-2xl font-black text-white mb-2">Resultados</h3>
+                    <p id="modal-message" class="text-slate-300 text-sm leading-relaxed mb-6">
+                        <!-- Mensaje dinámico JS -->
+                    </p>
+                    <div class="flex justify-center gap-4">
+                        <button onclick="closeModal()" id="modal-action-btn" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition shadow-lg shadow-indigo-600/30">
+                            Aceptar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de Página -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-12 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 space-y-3">
+            <p class="font-semibold text-slate-400">Infografía Interactiva de Comunicación Visual &bull; Creatividad y Diseño Digital</p>
+            <p>10.º Grado / Preparatoria &bull; Módulo de Tipografía, Color, Jerarquía y Composición</p>
+        </div>
+    </footer>
+
+    <script>
+        // DATOS DE PSICOLOGÍA DEL COLOR EN ESPAÑOL
+        const colorData = {
+            rojo: {
+                title: "Rojo: Energía, Urgencia y Pasión",
+                desc: "El rojo acelera el pulso cardíaco y capta la atención de inmediato. Es perfecto para botones de llamada a la acción, marcas de alto impacto, advertencias o relatos dramáticos.",
+                bgClass: "from-red-950/80 via-slate-900 to-slate-900 border-red-500/40",
+                badge: "bg-red-500/20 text-red-300 border-red-500/40",
+                quote: "Un thriller de suspenso o una marca de alta energía exigen el poder visceral del rojo."
+            },
+            azul: {
+                title: "Azul: Confianza, Tecnología y Calma",
+                desc: "El color preferido para expresar profesionalismo, seguridad corporativa y serenidad. Ampliamente adoptado en tecnología, salud y publicaciones académicas.",
+                bgClass: "from-blue-950/80 via-slate-900 to-slate-900 border-blue-500/40",
+                badge: "bg-blue-500/20 text-blue-300 border-blue-500/40",
+                quote: "El azul inspira confianza y equilibrio, haciendo digeribles los datos complejos."
+            },
+            amarillo: {
+                title: "Amarillo: Optimismo, Juventud e Innovación",
+                desc: "Asociado a la luz solar y la vitalidad mental. Destaca con un vivo contraste sobre fondos oscuros, estimulando el entusiasmo y el pensamiento creativo.",
+                bgClass: "from-amber-950/80 via-slate-900 to-slate-900 border-amber-500/40",
+                badge: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+                quote: "Inyecta energía y frescura. Ideal para acentuar ideas brillantes y conceptos juveniles."
+            },
+            verde: {
+                title: "Verde: Naturaleza, Vida y Crecimiento",
+                desc: "Simboliza sustentabilidad ambiental, salud, frescura y vitalidad económica. Promueve la armonía visual y reduce la fatiga ocular.",
+                bgClass: "from-emerald-950/80 via-slate-900 to-slate-900 border-emerald-500/40",
+                badge: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+                quote: "Ideal para marcas ecológicas, temas de bienestar y narrativas de revitalización."
+            },
+            morado: {
+                title: "Morado: Misterio, Lujo y Fantasía",
+                desc: "Históricamente ligado a la realeza, la magia y la imaginación sin límites. Altamente efectivo en ficción fantástica, cosmética y marcas de lujo.",
+                bgClass: "from-purple-950/80 via-slate-900 to-slate-900 border-purple-500/40",
+                badge: "bg-purple-500/20 text-purple-300 border-purple-500/40",
+                quote: "Evoca curiosidad y asombro al presentar lo extraordinario."
+            }
+        };
+
+        function selectColorMood(colorKey) {
+            const data = colorData[colorKey];
+            if (!data) return;
+
+            // Resaltar botón activo
+            const buttons = document.querySelectorAll('#color-btn-container button');
+            buttons.forEach(btn => {
+                btn.classList.remove('border-red-500', 'border-blue-500', 'border-amber-400', 'border-emerald-500', 'border-purple-500');
+            });
+            const activeBtn = document.getElementById(`btn-${colorKey}`);
+            if (activeBtn) activeBtn.classList.add(`border-${colorKey === 'amarillo' ? 'amber-400' : colorKey + '-500'}`);
+
+            // Renderizar recuadro de vista previa
+            const box = document.getElementById('color-preview-box');
+            box.className = `lg:col-span-2 glass-panel rounded-2xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden border bg-gradient-to-br ${data.bgClass} transition-all duration-500`;
+
+            const content = document.getElementById('color-preview-content');
+            content.innerHTML = `
+                <div class="inline-block px-3 py-1 rounded-full text-xs font-bold border mb-4 ${data.badge}">
+                    Vista Previa Psicológica
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-black text-white mb-4">${data.title}</h3>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">${data.desc}</p>
+                <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-700 italic text-xs sm:text-sm text-slate-300">
+                    <i class="fa-solid fa-quote-left mr-2 text-indigo-400"></i>
+                    ${data.quote}
+                </div>
+            `;
+        }
+
+        const typoErrorsData = {
+            error: {
+                viuda: `
+                    <div><span class="font-bold text-red-600 block mb-1">[Columna 1]</span>El diseño tipográfico exige gran atención al ritmo de lectura.</div>
+                    <div class="border-t border-red-300 pt-1 mt-2"><span class="font-bold text-red-600 block mb-1">[Columna 2]</span>aislada visualmente.</div>
+                `,
+                huerfana: `
+                    <div><span class="font-bold text-red-600 block mb-1">[Página 1]</span>...final del capítulo de la historia.</div>
+                    <div class="border-t border-red-300 pt-1 mt-2 text-red-600 font-bold">Un nuevo viaje comienza justo aquí.</div>
+                `,
+                runt: `
+                    <p class="text-slate-800 leading-snug">
+                        El diseñador debe alinear el texto para evitar dejar descolgadas
+                        <span class="bg-red-200 text-red-800 font-bold px-1 rounded block w-max">palabras.</span>
+                    </p>
+                `,
+                rios: `
+                    <p class="text-slate-800 river-simulation leading-relaxed">
+                        Texto justificado que genera huecos blancos verticales no deseados atravesando el párrafo.
+                    </p>
+                `
+            },
+            correct: {
+                viuda: `
+                    <div class="text-emerald-800 font-medium">
+                        El diseño tipográfico exige atención continua al ritmo de lectura para mantener la fluidez a través de las columnas.
+                    </div>
+                `,
+                huerfana: `
+                    <div class="text-emerald-800 font-medium">
+                        ...final del capítulo de la historia.<br><br>
+                        <strong>Un nuevo viaje comienza justo aquí</strong> manteniendo al menos dos líneas completas juntas.
+                    </div>
+                `,
+                runt: `
+                    <p class="text-slate-800 leading-snug">
+                        El diseñador ajusta el párrafo uniendo palabras cortas mediante un <span class="bg-emerald-100 text-emerald-800 font-bold px-1 rounded">espacio de no separación.</span>
+                    </p>
+                `,
+                rios: `
+                    <p class="text-slate-800 text-justify leading-relaxed">
+                        Texto maquetado adecuadamente con ajuste de interpalabra, eliminando los molestos ríos blancos verticales.
+                    </p>
+                `
+            }
+        };
+
+        function toggleTypographyErrorView(viewMode) {
+            const btnErr = document.getElementById('btn-view-error');
+            const btnCorr = document.getElementById('btn-view-correct');
+
+            if (viewMode === 'error') {
+                btnErr.className = "px-4 py-2 text-xs font-bold rounded-lg bg-red-500/20 text-red-300 border border-red-500/40";
+                btnCorr.className = "px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-white";
+            } else {
+                btnCorr.className = "px-4 py-2 text-xs font-bold rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
+                btnErr.className = "px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-white";
+            }
+
+            const data = typoErrorsData[viewMode];
+            document.getElementById('box-viuda').innerHTML = data.viuda;
+            document.getElementById('box-huerfana').innerHTML = data.huerfana;
+            document.getElementById('box-runt').innerHTML = data.runt;
+            document.getElementById('box-rios').innerHTML = data.rios;
+
+            // Etiquetas
+            const tags = ['tag-viuda', 'tag-huerfana', 'tag-runt', 'tag-rios'];
+            tags.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (viewMode === 'error') {
+                        el.className = "badge-status text-[10px] px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30";
+                        el.innerText = "Error";
+                    } else {
+                        el.className = "badge-status text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+                        el.innerText = "Correcto";
+                    }
+                }
+            });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // LÓGICA DEL LABORATORIO DE COMUNICACIÓN VISUAL
+        let labState = {
+            font: 'sans',
+            scale: 'md',
+            theme: 'dark',
+            align: 'left',
+            showGrid: false
+        };
+
+        function setLabFont(fontType) {
+            labState.font = fontType;
+            ['sans', 'serif', 'geo', 'script'].forEach(f => {
+                const btn = document.getElementById(`lab-font-${f}`);
+                if (btn) {
+                    if (f === fontType) {
+                        btn.className = "px-3 py-2 text-xs font-semibold rounded-xl bg-indigo-600 text-white border border-indigo-400 text-left transition";
+                    } else {
+                        btn.className = "px-3 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-left transition";
+                    }
+                }
+            });
+            updateLabPreview();
+        }
+
+        function setLabScale(scaleType) {
+            labState.scale = scaleType;
+            ['sm', 'md', 'lg'].forEach(s => {
+                const btn = document.getElementById(`lab-scale-${s}`);
+                if (btn) {
+                    if (s === scaleType) {
+                        btn.className = "px-3 py-2 text-xs font-semibold rounded-xl bg-indigo-600 text-white border border-indigo-400 transition";
+                    } else {
+                        btn.className = "px-3 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition";
+                    }
+                }
+            });
+            updateLabPreview();
+        }
+
+        function setLabTheme(themeType) {
+            labState.theme = themeType;
+            ['dark', 'editorial', 'emerald', 'rose'].forEach(t => {
+                const btn = document.getElementById(`lab-theme-${t}`);
+                if (btn) {
+                    if (t === themeType) {
+                        btn.className = "px-3 py-2 text-xs font-semibold rounded-xl bg-indigo-600 text-white border border-indigo-400 flex items-center gap-2";
+                    } else {
+                        btn.className = "px-3 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center gap-2";
+                    }
+                }
+            });
+            updateLabPreview();
+        }
+
+        function setLabAlign(alignType) {
+            labState.align = alignType;
+            const btnLeft = document.getElementById('lab-align-left');
+            const btnCenter = document.getElementById('lab-align-center');
+            
+            if (alignType === 'left') {
+                btnLeft.className = "flex-1 py-2 text-xs font-semibold rounded-xl bg-indigo-600 text-white border border-indigo-400";
+                btnCenter.className = "flex-1 py-2 text-xs font-semibold rounded-xl bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700";
+            } else {
+                btnCenter.className = "flex-1 py-2 text-xs font-semibold rounded-xl bg-indigo-600 text-white border border-indigo-400";
+                btnLeft.className = "flex-1 py-2 text-xs font-semibold rounded-xl bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700";
+            }
+            updateLabPreview();
+        }
+
+        function toggleLabGrid() {
+            labState.showGrid = !labState.showGrid;
+            const overlay = document.getElementById('lab-grid-overlay');
+            const btn = document.getElementById('lab-btn-grid');
+
+            if (labState.showGrid) {
+                overlay.classList.remove('hidden');
+                btn.className = "px-3 py-2 text-xs font-bold rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/50 flex items-center gap-1";
+            } else {
+                overlay.classList.add('hidden');
+                btn.className = "px-3 py-2 text-xs font-bold rounded-xl bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 flex items-center gap-1";
+            }
+        }
+
+        function updateLabPreview() {
+            const card = document.getElementById('lab-preview-card');
+            const title = document.getElementById('lab-card-title');
+            const subtitle = document.getElementById('lab-card-subtitle');
+            const badge = document.getElementById('lab-card-badge');
+            const content = document.getElementById('lab-card-content');
+            const feedback = document.getElementById('lab-feedback-text');
+
+            // Aplicar familia tipográfica
+            title.className = `font-black tracking-tight mb-3 leading-tight ${
+                labState.font === 'serif' ? 'demo-serif' :
+                labState.font === 'geo' ? 'demo-geo' :
+                labState.font === 'script' ? 'demo-script text-4xl sm:text-5xl' : 'demo-sans'
+            }`;
+
+            // Aplicar Escala
+            if (labState.scale === 'sm') {
+                title.classList.add('text-xl', 'sm:text-2xl');
+            } else if (labState.scale === 'md') {
+                title.classList.add('text-3xl', 'sm:text-4xl');
+            } else {
+                title.classList.add('text-4xl', 'sm:text-6xl');
+            }
+
+            // Alineación
+            content.className = `relative z-10 my-auto transition-all duration-300 ${labState.align === 'center' ? 'text-center items-center' : 'text-left'}`;
+
+            // Tema y Colores
+            if (labState.theme === 'dark') {
+                card.className = "lg:col-span-7 glass-panel p-6 sm:p-8 rounded-3xl border border-slate-700 relative overflow-hidden min-h-[460px] flex flex-col justify-between bg-slate-900/90";
+                subtitle.className = "text-sm sm:text-base font-semibold text-indigo-300 mb-4";
+                badge.className = "px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase inline-block bg-indigo-500/20 text-indigo-300 border border-indigo-500/30";
+                feedback.innerText = "Contraste óptimo para temas nocturnos e interfaces digitales modernas.";
+            } else if (labState.theme === 'editorial') {
+                card.className = "lg:col-span-7 p-6 sm:p-8 rounded-3xl border border-amber-500/30 relative overflow-hidden min-h-[460px] flex flex-col justify-between bg-gradient-to-br from-amber-950/60 via-slate-900 to-slate-900";
+                subtitle.className = "text-sm sm:text-base font-semibold text-amber-300 mb-4";
+                badge.className = "px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase inline-block bg-amber-500/20 text-amber-300 border border-amber-500/30";
+                feedback.innerText = "Estética editorial cálida inspirada en prensa escrita y revistas culturales.";
+            } else if (labState.theme === 'emerald') {
+                card.className = "lg:col-span-7 p-6 sm:p-8 rounded-3xl border border-emerald-500/30 relative overflow-hidden min-h-[460px] flex flex-col justify-between bg-gradient-to-br from-emerald-950/60 via-slate-900 to-slate-900";
+                subtitle.className = "text-sm sm:text-base font-semibold text-emerald-300 mb-4";
+                badge.className = "px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase inline-block bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+                feedback.innerText = "Psicología del verde: proyecta salud, frescura y sustentabilidad.";
+            } else if (labState.theme === 'rose') {
+                card.className = "lg:col-span-7 p-6 sm:p-8 rounded-3xl border border-pink-500/30 relative overflow-hidden min-h-[460px] flex flex-col justify-between bg-gradient-to-br from-pink-950/60 via-slate-900 to-slate-900";
+                subtitle.className = "text-sm sm:text-base font-semibold text-pink-300 mb-4";
+                badge.className = "px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase inline-block bg-pink-500/20 text-pink-300 border border-pink-500/30";
+                feedback.innerText = "Energía cromática vibrante, excelente para campañas creativas y artes visuales.";
+            }
+        }
+
+        // DATOS DEL JUEGO UNIFICADO EN ESPAÑOL
+        const UNIFIED_CONCEPTS = [
+            { id: 1, concept: "Tipografía Serif", category: "Tipografía", meaningId: 101 },
+            { id: 2, concept: "Tipografía Sans Serif", category: "Tipografía", meaningId: 102 },
+            { id: 3, concept: "Línea Viuda", category: "Maquetación", meaningId: 103 },
+            { id: 4, concept: "Línea Huérfana", category: "Maquetación", meaningId: 104 },
+            { id: 5, concept: "Psicología del Azul", category: "Color", meaningId: 105 },
+            { id: 6, concept: "Jerarquía Nivel 1", category: "Jerarquía", meaningId: 106 },
+            { id: 7, concept: "Regla de los Tercios", category: "Composición", meaningId: 107 },
+            { id: 8, concept: "Espacio Negativo (Aire)", category: "Composición", meaningId: 108 }
+        ];
+
+        const UNIFIED_MEANINGS = [
+            { id: 101, text: "Posee remates/pies decorativos; transmite tradición y es ideal para libros impresos." },
+            { id: 102, text: "Letras de trazo limpio sin remates; moderna y clara, ideal para pantallas digitales." },
+            { id: 103, text: "La última línea de un párrafo que queda aislada en la parte superior de una nueva columna o página." },
+            { id: 104, text: "La primera línea de un párrafo que queda aislada en la parte inferior de una columna o página." },
+            { id: 105, text: "Transmite profesionalismo, serenidad, confianza corporativa y tecnología." },
+            { id: 106, text: "Titular de gran escala con fuerte contraste visual para captar el foco inmediato." },
+            { id: 107, text: "División del lienzo en una cuadrícula de 3x3 para situar puntos de interés en las intersecciones." },
+            { id: 108, text: "Área no ocupada del lienzo que brinda respiro, elegancia y evita la saturación visual." }
+        ];
+
+        // Variables de estado
+        let selectedConceptId = null;
+        let selectedMeaningId = null;
+        let userPairs = {}; // conceptId -> meaningId
+        let attemptsLeft = 3;
+        let isGameOver = false;
+
+        function initUnifiedGame() {
+            selectedConceptId = null;
+            selectedMeaningId = null;
+            userPairs = {};
+            attemptsLeft = 3;
+            isGameOver = false;
+
+            updateAttemptsDisplay();
+            renderUnifiedBoard();
+        }
+
+        function updateAttemptsDisplay() {
+            const container = document.getElementById('attempts-display');
+            container.innerHTML = '';
+
+            for (let i = 0; i < 3; i++) {
+                if (i < attemptsLeft) {
+                    container.innerHTML += `<i class="fa-solid fa-heart text-red-500 text-lg"></i>`;
+                } else {
+                    container.innerHTML += `<i class="fa-regular fa-heart text-slate-600 text-lg"></i>`;
+                }
+            }
+
+            const iconBox = document.getElementById('game-attempts-icon');
+            if (attemptsLeft === 1) {
+                iconBox.className = "w-12 h-12 rounded-xl bg-red-500/30 text-red-400 flex items-center justify-center text-xl font-bold border border-red-500/50 animate-pulse";
+            } else {
+                iconBox.className = "w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl font-bold border border-amber-500/30";
+            }
+
+            updateMatchesScore();
+        }
+
+        function updateMatchesScore() {
+            const matchedCount = Object.keys(userPairs).length;
+            document.getElementById('matches-score').innerText = `${matchedCount} / ${UNIFIED_CONCEPTS.length} Emparejados`;
+        }
+
+        // Función de ordenamiento aleatorio
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        let currentShuffledMeanings = shuffleArray(UNIFIED_MEANINGS);
+
+        function renderUnifiedBoard() {
+            const conceptsContainer = document.getElementById('concepts-list');
+            const definitionsContainer = document.getElementById('definitions-list');
+
+            conceptsContainer.innerHTML = '';
+            definitionsContainer.innerHTML = '';
+
+            // Renderizar Conceptos
+            UNIFIED_CONCEPTS.forEach(c => {
+                const isSelected = selectedConceptId === c.id;
+                const pairedMeaningId = userPairs[c.id];
+
+                let borderClass = "border-slate-800 bg-slate-900/80 hover:border-slate-600";
+                if (isSelected) {
+                    borderClass = "border-indigo-500 bg-indigo-950/80 ring-2 ring-indigo-500/50";
+                } else if (pairedMeaningId) {
+                    borderClass = "border-pink-500/60 bg-slate-900/90";
+                }
+
+                conceptsContainer.innerHTML += `
+                    <div onclick="handleConceptClick(${c.id})" class="p-3.5 rounded-xl border ${borderClass} transition cursor-pointer flex items-center justify-between group">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-400 block">${c.category}</span>
+                            <span class="font-bold text-white text-sm sm:text-base">${c.concept}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            ${pairedMeaningId ? '<i class="fa-solid fa-link text-pink-400 text-xs"></i>' : ''}
+                            <i class="fa-solid fa-chevron-right text-xs text-slate-600 group-hover:text-slate-300"></i>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Renderizar Definiciones
+            currentShuffledMeanings.forEach(m => {
+                const isSelected = selectedMeaningId === m.id;
+                const isPairedWithConceptId = Object.keys(userPairs).find(cId => userPairs[cId] === m.id);
+
+                let borderClass = "border-slate-800 bg-slate-900/80 hover:border-slate-600";
+                if (isSelected) {
+                    borderClass = "border-pink-500 bg-pink-950/80 ring-2 ring-pink-500/50";
+                } else if (isPairedWithConceptId) {
+                    borderClass = "border-pink-500/60 bg-slate-900/90";
+                }
+
+                definitionsContainer.innerHTML += `
+                    <div onclick="handleMeaningClick(${m.id})" class="p-3.5 rounded-xl border ${borderClass} transition cursor-pointer flex items-center justify-between group">
+                        <p class="text-xs sm:text-sm text-slate-200 leading-relaxed pr-2">${m.text}</p>
+                        <div class="shrink-0">
+                            ${isPairedWithConceptId ? '<i class="fa-solid fa-check text-pink-400 text-xs"></i>' : '<i class="fa-regular fa-circle text-xs text-slate-600"></i>'}
+                        </div>
+                    </div>
+                `;
+            });
+
+            updateMatchesScore();
+        }
+
+        function handleConceptClick(conceptId) {
+            if (isGameOver) return;
+
+            if (selectedConceptId === conceptId) {
+                selectedConceptId = null;
+            } else {
+                selectedConceptId = conceptId;
+            }
+
+            tryPairing();
+            renderUnifiedBoard();
+        }
+
+        function handleMeaningClick(meaningId) {
+            if (isGameOver) return;
+
+            if (selectedMeaningId === meaningId) {
+                selectedMeaningId = null;
+            } else {
+                selectedMeaningId = meaningId;
+            }
+
+            tryPairing();
+            renderUnifiedBoard();
+        }
+
+        function tryPairing() {
+            if (selectedConceptId && selectedMeaningId) {
+                // Eliminar si la definición ya estaba asignada a otro concepto
+                Object.keys(userPairs).forEach(cId => {
+                    if (userPairs[cId] === selectedMeaningId) {
+                        delete userPairs[cId];
+                    }
+                });
+
+                // Asignar pareja
+                userPairs[selectedConceptId] = selectedMeaningId;
+
+                // Reiniciar selección
+                selectedConceptId = null;
+                selectedMeaningId = null;
+            }
+        }
+
+        function verifyUnifiedGame() {
+            if (isGameOver) return;
+
+            const pairedCount = Object.keys(userPairs).length;
+            if (pairedCount < UNIFIED_CONCEPTS.length) {
+                showModal(
+                    '<i class="fa-solid fa-triangle-exclamation text-amber-400"></i>',
+                    'Incompleto',
+                    `Has emparejado ${pairedCount} de ${UNIFIED_CONCEPTS.length} conceptos. Por favor completa todas las parejas antes de verificar.`
+                );
+                return;
+            }
+
+            // Calcular aciertos
+            let correctCount = 0;
+            UNIFIED_CONCEPTS.forEach(c => {
+                if (userPairs[c.id] === c.meaningId) {
+                    correctCount++;
+                }
+            });
+
+            if (correctCount === UNIFIED_CONCEPTS.length) {
+                // ¡Victoria!
+                isGameOver = true;
+                showModal(
+                    '<div class="w-full h-full rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center"><i class="fa-solid fa-trophy"></i></div>',
+                    '¡Excelente Trabajo!',
+                    `¡Lograste un puntaje perfecto de <strong>${correctCount}/${UNIFIED_CONCEPTS.length}</strong>! Has dominado los conceptos de Comunicación Visual.`,
+                    '¡Genial!'
+                );
+            } else {
+                // Error cometido
+                attemptsLeft--;
+                updateAttemptsDisplay();
+
+                if (attemptsLeft > 0) {
+                    showModal(
+                        '<div class="w-full h-full rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></div>',
+                        'Coincidencias Incorrectas',
+                        `Tuviste <strong>${correctCount} de ${UNIFIED_CONCEPTS.length}</strong> correctas.<br>Te quedan <strong>${attemptsLeft} intento(s)</strong>. Revisa tus parejas e inténtalo de nuevo.`,
+                        'Intentar de nuevo'
+                    );
+                } else {
+                    // Sin intentos
+                    isGameOver = true;
+                    showModal(
+                        '<div class="w-full h-full rounded-full bg-red-500/20 text-red-400 flex items-center justify-center"><i class="fa-solid fa-skull"></i></div>',
+                        'Sin Intentos Restantes',
+                        `Te has quedado sin intentos (Puntaje: ${correctCount}/${UNIFIED_CONCEPTS.length}). Puedes reiniciar la actividad para intentar superar tu marca.`,
+                        'Reiniciar Actividad'
+                    );
+                }
+            }
+        }
+
+        function resetUnifiedGame() {
+            currentShuffledMeanings = shuffleArray(UNIFIED_MEANINGS);
+            initUnifiedGame();
+        }
+
+        function showModal(iconHtml, title, message, btnText = "Aceptar") {
+            document.getElementById('modal-icon').innerHTML = iconHtml;
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-message').innerHTML = message;
+            document.getElementById('modal-action-btn').innerText = btnText;
+            document.getElementById('game-modal').classList.remove('hidden');
+            document.getElementById('game-modal').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('game-modal').classList.add('hidden');
+            document.getElementById('game-modal').classList.remove('flex');
+
+            if (attemptsLeft <= 0) {
+                resetUnifiedGame();
+            }
+        }
+
+        // Inicializar vistas por defecto al cargar la página
+        window.onload = function() {
+            selectColorMood('rojo');
+            toggleTypographyErrorView('error');
+            initUnifiedGame();
+            updateLabPreview();
+        };
+    </script>
+</body>
+</html>
